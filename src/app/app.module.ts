@@ -9,6 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BrowserAnimationsModule,
     AlertModule,
     TooltipModule,
-    TabsModule
+    TabsModule,
+    ModalModule.forRoot(),
+    RatingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
