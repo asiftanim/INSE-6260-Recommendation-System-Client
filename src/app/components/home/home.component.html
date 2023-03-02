@@ -62,5 +62,20 @@
     </div>
     <div class="modal-body">
       <p>Please Rate the restaurant between 0-5</p>
+      <rating [max]="5" [(ngModel)]="y" [customTemplate]="tt"></rating>
     </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-default" (click)="modalRef?.hide()">Close</button>
+        <button type="button" class="btn btn-outline-success" (click)="modalRef?.hide()">Save Chnages</button>
+      </div>
 </ng-template>
+
+
+<div>
+    
+    <ng-template #tt let-i="index" let-v="value">
+      <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+        {{i < v ? '&#9733;' : '&#9734;'}}
+      </button>
+    </ng-template>
+  </div>

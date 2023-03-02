@@ -11,7 +11,7 @@ export class HomeComponent {
   constructor(private modalService: BsModalService) {}
 
   x = 5;
-  y = 2;
+  y = 0;
  
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
