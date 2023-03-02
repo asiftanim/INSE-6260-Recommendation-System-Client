@@ -1,1 +1,66 @@
-<p>home works!</p>
+<div class="container">
+    <div class="alert alert-success mt-5" role="alert">
+        <p class="fw-bold">Welcome</p>
+        Thanks for joining. As you are a new user so the recommendation system cannot suggest any restaurant for you right now. Below are some randomly selected restaurant. If those are familiar to you please put a rating for it. When you submit a rating then our recommendation system will show you some recommended restaurant based on yours community collaboration.  
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <p class="h4 mt-5">List of randomly selected restaurant</p>
+            <table class="table table-hover mt-5 w-100">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Place Id</th>
+                        <th>Cuisine</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>135085</td>
+                        <td>Spanish</td>
+                        <td>
+                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>1</td>
+                        <td>135085</td>
+                        <td>Spanish</td>
+                        <td>
+                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>135085</td>
+                        <td>Spanish</td>
+                        <td>
+                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Rating</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Please Rate the restaurant between 0-5</p>
+    </div>
+</ng-template>
