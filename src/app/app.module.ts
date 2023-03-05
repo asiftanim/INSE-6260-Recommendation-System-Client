@@ -12,6 +12,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     TabsModule,
     ModalModule.forRoot(),
     RatingModule.forRoot(),
-    FormsModule
+    FormsModule,
+    PaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
