@@ -2,7 +2,9 @@ import { Component, TemplateRef  } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { LoginResponse } from 'src/app/models/LoginResponse';
 import { RestaurantModel } from 'src/app/models/RestaurantModel';
+import { SaveRatingModel } from 'src/app/models/SaveRatingModel';
 import { AppAuthService } from 'src/app/services/auth.service';
+import { RestaurantService } from 'src/app/services/RestaurantService';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,8 @@ import { AppAuthService } from 'src/app/services/auth.service';
 export class HomeComponent {
   modalRef?: BsModalRef;
   loginResponse: LoginResponse;
+  selectedPlaceId: number;
+  ratingNotSelected: boolean = false;
   restaurantData: RestaurantModel[] = [
     {
       "Id": 1,
@@ -33,21 +37,46 @@ export class HomeComponent {
     }
   ]
 
-  constructor(private modalService: BsModalService, private _appAuthService: AppAuthService) {
+  constructor(private modalService: BsModalService, 
+    private _appAuthService: AppAuthService, 
+    private _restaurantService: RestaurantService) {
     this.loginResponse = new LoginResponse();
   }
 
   ngOnInit() {
     this.loginResponse = this._appAuthService.getLoggedUserInfo();
-
-    console.log(this._appAuthService.getLoggedUserInfo());
   }
 
-  x = 5;
-  y = 0;
+  restaurantRating = 0;
  
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, placeId: number) {
+    this.selectedPlaceId = placeId;
     this.modalRef = this.modalService.show(template);
+  }
+
+  saveModal(){
+    if(this.restaurantRating == 0){
+      this.ratingNotSelected = true;
+    }else{
+      let ratingModel = new SaveRatingModel();
+      ratingModel.UserId = this.loginResponse.user_id;
+      ratingModel.PlaceId = this.selectedPlaceId;
+      ratingModel.Rating = this.restaurantRating;
+
+      this._restaurantService.saveRestaurantRating(ratingModel);
+
+      this.modalRef?.hide();
+      this.restaurantRating = 0;
+      this.selectedPlaceId = 0;
+      this.ratingNotSelected = false;
+    }
+  }
+
+  closeModal(){
+      this.modalRef?.hide();
+      this.restaurantRating = 0;
+      this.selectedPlaceId = 0;
+      this.ratingNotSelected = false;
   }
 
   public logout() {

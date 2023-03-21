@@ -34,7 +34,7 @@
                         <td>{{item.PlaceId}}</td>
                         <td>{{item.Cuisine}}</td>
                         <td>
-                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
+                            <button class="btn btn-outline-success" (click)="openModal(template, item.PlaceId)">Rate</button>
                         </td>
                     </tr>
                 </tbody>
@@ -50,17 +50,18 @@
 <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Rating</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <p>Please Rate the restaurant between 1-5</p>
-      <rating [max]="5" [(ngModel)]="y" [customTemplate]="tt"></rating>
+      <rating [max]="5" [(ngModel)]="restaurantRating" [customTemplate]="tt"></rating>
+      <div style="color: red;" *ngIf="ratingNotSelected">Select a rating between 1-5</div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-default" (click)="modalRef?.hide()">Close</button>
-        <button type="button" class="btn btn-outline-success" (click)="modalRef?.hide()">Save Chnages</button>
+        <button type="button" class="btn btn-outline-default" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-outline-success" (click)="saveModal()">Save Chnages</button>
       </div>
 </ng-template>
 
