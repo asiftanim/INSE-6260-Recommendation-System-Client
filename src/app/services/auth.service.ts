@@ -1,7 +1,11 @@
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LoginResponse } from "../models/LoginResponse";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class AppAuthService{
     
     constructor(private http: HttpClient, private _router: Router) {
@@ -9,7 +13,7 @@ export class AppAuthService{
     }
 
     public finishAuth(loginResponse: LoginResponse){
-        if(loginResponse.is_auth){
+        if(loginResponse.user_id != null){
             localStorage.setItem('isUserLoggedIn', "true");
             localStorage.setItem('loggedInUserInfo', JSON.stringify(loginResponse));
         }
@@ -25,7 +29,6 @@ export class AppAuthService{
     }
 
     public logout() {
-        localStorage.clear();
         localStorage.clear();
         this._router.navigate(['/']);
       }
