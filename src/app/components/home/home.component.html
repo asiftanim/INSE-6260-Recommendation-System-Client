@@ -9,7 +9,7 @@
 </div>
 
 <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
+    <div class="alert alert-success mt-5" role="alert" *ngIf="loginResponse.is_new">
         <p class="fw-bold">Welcome</p>
         Thanks for joining. As you are a new user so the recommendation system cannot suggest any restaurant for you right now. Below are some randomly selected restaurant. If those are familiar to you please put a rating for it. When you submit a rating then our recommendation system will show you some recommended restaurant based on yours community collaboration.  
     </div>
@@ -17,7 +17,8 @@
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <p class="h4 mt-5">List of randomly selected restaurant</p>
+            <p class="h4 mt-5" *ngIf="loginResponse.is_new">List of randomly selected restaurant</p>
+            <p class="h4 mt-5" *ngIf="!loginResponse.is_new">List of Recommended restaurant</p>
             <table class="table table-hover mt-5 w-100">
                 <thead>
                     <tr>
@@ -28,46 +29,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>135085</td>
-                        <td>Spanish</td>
-                        <td>
-                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>2</td>
-                        <td>135086</td>
-                        <td>Indian</td>
-                        <td>
-                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>135087</td>
-                        <td>Chainese</td>
-                        <td>
-                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>4</td>
-                        <td>135088</td>
-                        <td>Italian</td>
-                        <td>
-                            <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>5</td>
-                        <td>135089</td>
-                        <td>Turkish</td>
+                    <tr *ngFor="let item of restaurantData">
+                        <td>{{item.Rank}}</td>
+                        <td>{{item.PlaceId}}</td>
+                        <td>{{item.Cuisine}}</td>
                         <td>
                             <button class="btn btn-outline-success" (click)="openModal(template)">Rate</button>
                         </td>

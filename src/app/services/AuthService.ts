@@ -22,7 +22,7 @@ export class AuthService {
         let loginResponse = new LoginResponse();
         loginResponse.id = 1;
         loginResponse.user_id = "U12345";
-        loginResponse.is_new = true;
+        loginResponse.is_new = false;
         this._authService.finishAuth(loginResponse);
         this._authService.navigateToHomePage();
  

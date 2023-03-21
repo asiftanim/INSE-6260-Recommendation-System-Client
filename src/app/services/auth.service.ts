@@ -20,7 +20,7 @@ export class AppAuthService{
     }
 
     public getLoggedUserInfo(): LoginResponse {
-        let userModel: LoginResponse = JSON.parse(JSON.stringify(localStorage.getItem('loggedInUserInfo')));
+        let userModel: LoginResponse = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
         return userModel;
     }
 
