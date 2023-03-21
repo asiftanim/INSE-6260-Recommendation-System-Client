@@ -9,18 +9,20 @@
                   <tab heading="Login">
                     <div class="card mt-2" style="width: 26rem;">
                         <div class="card-body">
-                            <form>
+                            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
                                 <p class="text-center fw-bold">Login</p>
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Email/UserId</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email/userid">
+                                  <input type="email" formControlName="userId" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email/userid">
+                                  <span style="color: red;" *ngIf="lf.userId && lf.userId.invalid && lf.userId.touched">This field is required !</span>
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <span style="color: red;" *ngIf="lf.password && lf.password.invalid && lf.password.touched">This field is required !</span>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-outline-success mt-2 text-center">Login</button>
+                                    <button type="submit" class="btn btn-outline-success mt-2 text-center" [disabled]="!loginForm.valid">Login</button>
                                 </div>
                                 
                               </form>
@@ -30,22 +32,26 @@
                   <tab heading="Registration">
                     <div class="card mt-2" style="width: 26rem;">
                         <div class="card-body">
-                            <form>
+                            <form [formGroup]="registrationForm" (ngSubmit)="onRegistration()">
                                 <p class="text-center fw-bold">Registration</p>
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Email</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                  <input type="email" formControlName="regUserId" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                  <span style="color: red;" *ngIf="rf.regUserId && rf.regUserId.invalid && rf.regUserId.touched">This field is required !</span>
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <input type="password" formControlName="regPassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <span style="color: red;" *ngIf="rf.regPassword && rf.regPassword.invalid && rf.regPassword.touched">This field is required !</span>
                                 </div>
                                 <div class="form-group mt-2">
                                   <label for="exampleInputPassword1">Confirm Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                                  <input type="password" formControlName="regConPassword" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+                                  <div style="color: red;" *ngIf="rf['regConPassword'].getError('required')!=null && rf.regConPassword.touched">This field is required !</div>
+                                  <div style="color: red;" *ngIf="rf.regConPassword.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-outline-primary mt-2 text-center">Submit</button>
+                                    <button type="submit" class="btn btn-outline-primary mt-2 text-center" [disabled]="!registrationForm.valid">Submit</button>
                                 </div>
                               </form>
                         </div>
