@@ -18,20 +18,11 @@ export class AuthService {
     }
 
     login(loginData: LoginModel){
-        console.log(loginData);
-        let loginResponse = new LoginResponse();
-        loginResponse.id = 1;
-        loginResponse.user_id = "U12345";
-        loginResponse.is_new = false;
-        this._authService.finishAuth(loginResponse);
-        this._authService.navigateToHomePage();
- 
-        //return this.http.post(this.baseUrl + "/login", loginData);
+        return this.http.post(this.baseUrl + "/User/Login", loginData);
     }
 
     registration(registrationData: LoginModel){
-        console.log(registrationData);
-        //return this.http.post(this.baseUrl + "/registration", loginData);
+        return this.http.post(this.baseUrl + "/User/CreateUser", registrationData);
     }
 
 }

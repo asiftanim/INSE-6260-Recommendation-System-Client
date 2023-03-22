@@ -13,10 +13,8 @@ export class AppAuthService{
     }
 
     public finishAuth(loginResponse: LoginResponse){
-        if(loginResponse.user_id != null){
             localStorage.setItem('isUserLoggedIn', "true");
             localStorage.setItem('loggedInUserInfo', JSON.stringify(loginResponse));
-        }
     }
 
     public getLoggedUserInfo(): LoginResponse {

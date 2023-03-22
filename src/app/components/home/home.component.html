@@ -9,16 +9,16 @@
 </div>
 
 <div class="container">
-    <div class="alert alert-success mt-5" role="alert" *ngIf="loginResponse.is_new">
-        <p class="fw-bold">Welcome</p>
+    <div class="alert alert-success mt-5" role="alert" *ngIf="loginResponse.isNew">
+        <p>Welcome <span class="fw-bold">{{loginResponse.userId}}</span></p>
         Thanks for joining. As you are a new user so the recommendation system cannot suggest any restaurant for you right now. Below are some randomly selected restaurant. If those are familiar to you please put a rating for it. When you submit a rating then our recommendation system will show you some recommended restaurant based on yours community collaboration.  
     </div>
 
     <div class="row">
         <div class="col-2"></div>
         <div class="col-8">
-            <p class="h4 mt-5" *ngIf="loginResponse.is_new">List of randomly selected restaurant</p>
-            <p class="h4 mt-5" *ngIf="!loginResponse.is_new">List of Recommended restaurant</p>
+            <p class="h4 mt-5" *ngIf="loginResponse.isNew">List of randomly selected restaurant</p>
+            <p class="h4 mt-5" *ngIf="!loginResponse.isNew">List of Recommended restaurant</p>
             <table class="table table-hover mt-5 w-100">
                 <thead>
                     <tr>

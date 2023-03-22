@@ -1,5 +1,5 @@
 export class LoginResponse {
-    user_id: string;
+    userId: string;
     id: number;
-    is_new: boolean;
+    isNew: boolean;
 }

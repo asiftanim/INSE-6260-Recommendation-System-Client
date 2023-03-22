@@ -3,6 +3,8 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginModel } from '../../models/LoginModel';
 import { AuthService }  from "../../services/AuthService";
+import { LoginResponse } from 'src/app/models/LoginResponse';
+import { AppAuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-authentication',
@@ -26,7 +28,7 @@ export class AuthenticationComponent {
     validator: this.confirmedValidator('regPassword', 'regConPassword')
   });
 
-  constructor(private loginFormBuilder: FormBuilder, private registrationFormBuilder: FormBuilder, private _authService: AuthService) {}
+  constructor(private loginFormBuilder: FormBuilder, private registrationFormBuilder: FormBuilder, private _authService: AuthService, private _appAuthService: AppAuthService) {}
 
   get lf(){
     return this.loginForm.controls;
@@ -41,10 +43,21 @@ export class AuthenticationComponent {
     let userId: any = this.loginForm.value.userId;
     let password: any = this.loginForm.value.password;
 
-    loginModel.user_id = userId;
-    loginModel.password = password;
+    loginModel.UserId = userId;
+    loginModel.Password = password;
 
-    this._authService.login(loginModel);
+    let loginResponse = new LoginResponse();
+
+    this._authService.login(loginModel).subscribe(res => {
+      loginResponse = JSON.parse(JSON.stringify(res));
+      if(loginResponse.userId){
+        this._appAuthService.finishAuth(loginResponse);
+        this._appAuthService.navigateToHomePage();
+      }else{
+        alert("Login Failed!");
+      }
+    });
+
     this.loginForm.reset();
   }
 
@@ -53,10 +66,17 @@ export class AuthenticationComponent {
     let userId: any = this.registrationForm.value.regUserId;
     let password: any = this.registrationForm.value.regPassword;
 
-    loginModel.user_id = userId;
-    loginModel.password = password;
+    loginModel.UserId = userId;
+    loginModel.Password = password;
 
-    this._authService.registration(loginModel);
+    let registrationResponse = new LoginResponse();
+
+    this._authService.registration(loginModel).subscribe(res => {
+        registrationResponse = JSON.parse(JSON.stringify(res));
+        if(registrationResponse.id != null){
+          alert("Registration Success !");
+        }
+    });
     this.registrationForm.reset();
   }
 

@@ -59,7 +59,7 @@ export class HomeComponent {
       this.ratingNotSelected = true;
     }else{
       let ratingModel = new SaveRatingModel();
-      ratingModel.UserId = this.loginResponse.user_id;
+      ratingModel.UserId = this.loginResponse.userId;
       ratingModel.PlaceId = this.selectedPlaceId;
       ratingModel.Rating = this.restaurantRating;
 
