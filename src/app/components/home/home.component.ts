@@ -17,24 +17,24 @@ export class HomeComponent {
   selectedPlaceId: number;
   ratingNotSelected: boolean = false;
   restaurantData: RestaurantModel[] = [
-    {
-      "Id": 1,
-      "PlaceId": 12341,
-      "Cuisine": "Italian",
-      "Rank": 1
-    },
-    {
-      "Id": 2,
-      "PlaceId": 12342,
-      "Cuisine": "Italian",
-      "Rank": 2
-    },
-    {
-      "Id": 3,
-      "PlaceId": 12343,
-      "Cuisine": "Italian",
-      "Rank": 3
-    }
+    // {
+    //   "Id": 1,
+    //   "PlaceId": 12341,
+    //   "Cuisine": "Italian",
+    //   "Rank": 1
+    // },
+    // {
+    //   "Id": 2,
+    //   "PlaceId": 12342,
+    //   "Cuisine": "Italian",
+    //   "Rank": 2
+    // },
+    // {
+    //   "Id": 3,
+    //   "PlaceId": 12343,
+    //   "Cuisine": "Italian",
+    //   "Rank": 3
+    // }
   ]
 
   constructor(private modalService: BsModalService, 
@@ -45,6 +45,17 @@ export class HomeComponent {
 
   ngOnInit() {
     this.loginResponse = this._appAuthService.getLoggedUserInfo();
+
+    if(this.loginResponse.isNew){
+      this._restaurantService.GetRandomRestaurants().subscribe(res => {
+          this.restaurantData = JSON.parse(JSON.stringify(res));
+      });
+    }else{
+      this._restaurantService.GetRecommendedRestaurants(this.loginResponse.userId).subscribe(res =>{
+        this.restaurantData = JSON.parse(JSON.stringify(res));
+      });
+    }
+    
   }
 
   restaurantRating = 0;
@@ -63,7 +74,12 @@ export class HomeComponent {
       ratingModel.PlaceId = this.selectedPlaceId;
       ratingModel.Rating = this.restaurantRating;
 
-      this._restaurantService.saveRestaurantRating(ratingModel);
+      this._restaurantService.saveRestaurantRating(ratingModel).subscribe(res => {
+        console.log(res);
+        this._restaurantService.GetRecommendedRestaurants(this.loginResponse.userId).subscribe(res =>{
+          this.restaurantData = JSON.parse(JSON.stringify(res));
+        });
+      });
 
       this.modalRef?.hide();
       this.restaurantRating = 0;

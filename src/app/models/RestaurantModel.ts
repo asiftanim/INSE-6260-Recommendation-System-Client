@@ -1,6 +1,6 @@
 export class RestaurantModel{
-    Id: number;
-    PlaceId: number;
-    Cuisine: string;
-    Rank: number;
+    id: number;
+    placeId: number;
+    cuisine: string;
+    rank: number = 0;
 }
