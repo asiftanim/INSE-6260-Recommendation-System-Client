@@ -26,6 +26,10 @@ export class AppAuthService{
         return (localStorage.getItem('isUserLoggedIn') == "true" ? true : false);
     }
 
+    public isNew(): boolean {
+      return (JSON.parse(localStorage.loggedInUserInfo)['isNew'] == true ? true : false);
+  }
+
     public logout() {
         localStorage.clear();
         this._router.navigate(['/']);

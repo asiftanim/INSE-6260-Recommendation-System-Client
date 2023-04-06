@@ -25,4 +25,13 @@ export class AuthService {
         return this.http.post(this.baseUrl + "/User/CreateUser", registrationData);
     }
 
+    getCurrentUserInfo(){
+        var userInfo = this._authService.getLoggedUserInfo();
+        return this.http.get(this.baseUrl + "/User/GetUserByUserId/" + userInfo.userId)
+    }
+
+    updateCurrentUserInfo(){
+        var userInfo = this._authService.getLoggedUserInfo();
+        return this.http.post(this.baseUrl + "/User/UpdateUserByUserId", userInfo)
+    }
 }

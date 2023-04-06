@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of restaurantData">
+                    <tr *ngFor="let item of paginationRestaurantData">
                         <td *ngIf="!loginResponse.isNew">{{item.rank}}</td>
                         <td *ngIf="loginResponse.isNew">{{item.id}}</td>
                         <td>{{item.placeId}}</td>
@@ -41,7 +41,7 @@
                     </tr>
                 </tbody>
             </table>
-            <pagination [totalItems]="20"></pagination>
+            <pagination [totalItems]="restaurantData.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)"></pagination>
         </div>
         <div class="col-2"></div>
     </div>

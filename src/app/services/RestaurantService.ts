@@ -21,7 +21,7 @@ export class RestaurantService{
     }
 
     GetRecommendedRestaurants(id: string){
-        return this.http.get(this.baseUrl + "/Restaurant/GetRestaurantByUserId/" + id);
+        return this.http.get(this.baseUrl + "/Restaurant/GetRecommendedRestaurants/" + id);
     }
 
 }

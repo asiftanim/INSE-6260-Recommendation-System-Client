@@ -80,8 +80,6 @@ export class AuthenticationComponent {
     this.registrationForm.reset();
   }
 
-  
-
   confirmedValidator(regPassword: any, conRegPassword: string){
     return (formGroup: FormGroup) => {
         const passwordControl = formGroup.controls[regPassword];
